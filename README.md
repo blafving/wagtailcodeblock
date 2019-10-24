@@ -1,8 +1,13 @@
 # Wagtail Code Block
 
-Wagtail Code Block is a syntax highlighted block for source code for the Wagtail CMS. It features real-time highlighting in the Wagtail editor, the front end, line numbering, and support for PrismJS themes.
+Wagtail Code Block displays your source code in easy-to-read block form for Wagtail CMS. It features: 
 
-It uses the [PrismJS](http://prismjs.com/) library both in Wagtail Admin and the website and requires jQuery.
+* Real-time highlighting — both from Wagtail editor or front end
+* Line numbering
+* Support for PrismJS themes
+* Support for a many different languages ranging in popularity from blockbuster to cult classic, to the downright obscure
+
+It uses the [PrismJS](http://prismjs.com/) library and requires jQuery.
 
 ## Example Usage
 
@@ -15,13 +20,7 @@ class ContentStreamBlock(StreamBlock):
     code = CodeBlock(label='Code')
 ```
 
-You can also force it to use a single language by providing a language code which must be included in your `WAGTAIL_CODE_BLOCK_LANGUAGES` setting:
-
-```python
-code = CodeBlock(label='Bash Code', language='bash')
-```
-
-## Screenshot of the CMS Editor Interface
+## What You See in the CMS Editor
 
 ![Admin in Action](img/screenshot-editor.png)
 
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
 ``` 
 
 ## Django Settings
+Customize your code blocks according to PrismJS themes and language.
 
 ### Themes
 
@@ -55,13 +55,13 @@ Wagtail Code Block defaults to the PrismJS "Coy" theme, which looks good with Wa
 * **'solarizedlight'**: <a href="http://prismjs.com/index.html?theme=prism-solarizedlight" target="_blank">Solarized Light</a>
 * **'twilight'**: <a href="http://prismjs.com/index.html?theme=prism-twilight" target="_blank">Twilight</a>
 
-For example, in you want to use the Solarized Light theme: `WAGTAIL_CODE_BLOCK_THEME = 'solarizedlight'`
+For example, if you want to use the Solarized Light theme: `WAGTAIL_CODE_BLOCK_THEME = 'solarizedlight'`
 If you want to use the Default theme: `WAGTAIL_CODE_BLOCK_THEME = None`
 
-### Languages Available
+### Languages
 
 You can customize the languages available by configuring `WAGTAIL_CODE_BLOCK_LANGUAGES` in your Django settings.
-By default, it will be set with these languages, since most users are in the Python web development community:
+Default is set to the following critically acclaimed languages:
 
 ```python
 WAGTAIL_CODE_BLOCK_LANGUAGES = (
@@ -77,7 +77,25 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
 )
 ```
 
-Each language in this setting is a tuple of the PrismJS code and a descriptive label. If you want use all available languages, here is a list:
+Notice that each language in this setting is a tuple of the PrismJS code and a descriptive label. 
+
+If you want, you can also force code blocks to use a single language only by providing a language code in your `WAGTAIL_CODE_BLOCK_LANGUAGES` setting. So instead of:
+
+```python
+from wagtailcodeblock.blocks import CodeBlock
+
+class ContentStreamBlock(StreamBlock):
+    heading = TextBlock()
+    paragraph = TextBlock()
+    code = CodeBlock(label='Code')
+```
+...simply replace the code setting with your language of choice:
+
+```python
+code = CodeBlock(label='Bash Code', language='bash')
+```
+
+Here is a list of all the languages available to you:
 
 ```python
 WAGTAIL_CODE_BLOCK_LANGUAGES = (
@@ -326,6 +344,7 @@ WAGTAIL_CODE_BLOCK_LANGUAGES = (
 
 # Contributors
 
+* Brandon Lafving (https://github.com/blafving)
 * José Luis (https://github.com/SalahAdDin)
 * Lucas Moeskops (https://github.com/lucasmoeskops)
 * Nick Sarbicki (https://github.com/NDevox)
